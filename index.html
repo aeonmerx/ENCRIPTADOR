@@ -1,0 +1,47 @@
+<!DOCTYPE html> <!-- Doctype le dice al navegador web que lo que viene  es html-->
+<html lang="es"> <!--Configurar el lenguaje-->
+  <head> <!--ACA VA LAS CONFIGURACIONES DEL HTML , ESTE CONTENIDO NO SE VE EN PANTALLA-->
+    <meta charset="utf-8"> <!--PERMITIRME USAR TILDES, ACENTOS Y QUE EL PROGRAMA LOS LEA TAL CUAL COMOM LOS ESCRIBO-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!--ADAPTA MI WEB A CELULARES Y TABLETS-->
+    <title>Encriptador</title> <!--TITULO DE MI PAGINA WEB-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <!-- IMNPORTANDO BOOSTRAP ES UNA LIBERIA DE CSS PARA AGREGAR COMPONENTES CSS YA HECHOS -->
+    <link rel="stylesheet" href="index.css"> <!-- IMPORTANDO EL CSS--> 
+</head> <!--FIN DEL HEAD-->
+<body> <!--ES LO QUE SE MUESTRA EN PANTALLA-->
+    <div class="container-fluid"> <!--CLASE DE BOOSTRAP QUE SE PERMITE QUE EL CONTENIDO QUE ESTE DENTRO SE ADAPTE-->
+<div class="row"> <!--CREA UNA NUEVA FILA-->
+<div class="col-md-12"> <!--CREA UNA DIVISION DE LARGO 12 DE 12-->
+
+<br>
+  <h1>ENCRIPTADOR DE TEXTO</h1> <!--TITULO-->
+    <div class="tarjeta"> <!--CLASS AGRUPAN ELEMENTOS SIMILARES-->
+        <!--PARA IDENTIFICAR UN ELEMENTO ÚNICO-->
+        <!--DOS ELEMENTOS DIFERENTES NO PUEDEN TENER EL MISMO ID, PERO SI LA MISMA CLASE-->
+        <br>
+<input type="text" id="mensaje" placeholder="Ingrese su mensaje"class="form-control"> <!--INPUT ES COMO RECOGEMOS LA INFORMACIÓN DEL CLIENTE-->
+<br> <!--GENERA UN ESPACIADO DE LINEA-->
+<button id="encriptar"class="btn btn-success">Encriptar</button> <!--CREAR UN BOTON--> 
+<!--CLASS btn-succes LE DA COLOR VERDE CLASE DE BOOSTRAP-->
+<hr>
+<button id="desencriptar" class="btn btn-danger">Desencriptar</button>
+    </div>
+    <div class="tarjeta">
+        <br>
+        <hr> <!--CREA UNA LINEA DIVISORIA -->
+<input type="text" id="resultado" placeholder="resultado" class="form-control">
+<!--RECOLECTAR DATOS-->
+<hr>
+<button id="copiar" class="btn btn-primary">Copiar</button> <!--CREAR BOTON-->
+<button id="escuchar" class="btn btn-warning">Escuchar</button> <!--CREAR BOTON-->
+    </div>
+</div> 
+</div>
+</div>
+<!--IMPORTANDO EL JAVASCRIPT EN ESTE HTML-->
+    <script src="main.js"> 
+    </script> 
+    <!--IMPORTA EL JAVASCRIPT DE BOOSTRAP PARA LOS COMPONENTES DE BOOSTRAP-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" ></script>
+</body>
+</html>
