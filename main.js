@@ -13,52 +13,17 @@
   <input type="button" id="copiar" value="Copiar">
   <input type="button" id="escuchar" value="Escuchar">
   <input type="text" id="resultado" readonly>
+  <div id="entropia"></div>
   
   <script>
     const inputMensaje = document.querySelector("#mensaje");
     const inputModificador = document.querySelector("#modificador");
     const inputResultado = document.querySelector("#resultado");
+    const divEntropia = document.querySelector("#entropia");
     const btnEncriptar = document.querySelector("#encriptar");
     const btnDesencriptar = document.querySelector("#desencriptar");
     const btnCopiar = document.querySelector("#copiar");
     const btnEscuchar = document.querySelector("#escuchar");
-    
-    function encriptar() {
-      const mensaje = inputMensaje.value;
-      const modificador = inputModificador.value;
-      const mensajeEncriptado = mensaje.replace(/[A-Za-zÑñ]/g, function (match) {
-        const equivalencia = equivalencias[match.toUpperCase()] || match;
-        return (parseInt(equivalencia) + parseInt(modificador)).toString().padStart(3, '0');
-      });
-      inputResultado.value = mensajeEncriptado;
-    }
-    
-    function desencriptar() {
-      const mensajeEncriptado = inputMensaje.value;
-      const modificador = inputModificador.value;
-      const mensaje = mensajeEncriptado.replace(/\d{3}/g, function (match) {
-        return Object.keys(equivalencias).find(key => equivalencias[key.toUpperCase()] === (parseInt(match) - parseInt(modificador)).toString().padStart(3, '0')) || match;
-      });
-      inputResultado.value = mensaje;
-    }
-
-    function copiar() {
-      var mensajeEncriptado = inputResultado.value;
-      navigator.clipboard.writeText(mensajeEncriptado);
-    }
-    
-    function escuchar() {
-      var mensajeEncriptado = inputResultado.value;
-      let msg = new SpeechSynthesisUtterance();
-      msg.text = mensajeEncriptado;
-      msg.lang = "es-Es";
-      window.speechSynthesis.speak(msg);
-    }
-    
-    btnEncriptar.onclick = encriptar;
-    btnDesencriptar.onclick = desencriptar;
-    btnCopiar.onclick = copiar;
-    btnEscuchar.onclick = escuchar;
     
     const equivalencias = {
       'A': '693', 'B': '396', 'C': '111', 'D': '714', 'E': '417',
@@ -74,6 +39,70 @@
       'u': '777', 'v': '471', 'w': '174', 'x': '888', 'y': '582',
       'z': '285', 'ñ': '999'
     };
+
+    function encriptar(modificador) {
+      const mensaje = inputMensaje.value;
+      const mensajeEncriptado = mensaje.replace(/[A-Za-zÑñ]/g, function (match) {
+        const equivalencia = equivalencias[match.toUpperCase()] || match;
+        return (parseInt(equivalencia) + parseInt(modificador || 0)).toString().padStart(3, '0');
+      });
+      inputResultado.value = mensajeEncriptado;
+      calcularEntropia(mensajeEncriptado);
+    }
+    
+    function desencriptar(modificador) {
+      const mensajeEncriptado = inputMensaje.value;
+      const mensaje = mensajeEncriptado.replace(/\d{3}/g, function (match) {
+        return Object.keys(equivalencias).find(key => equivalencias[key.toUpperCase()] === (parseInt(match) - parseInt(modificador || 0)).toString().padStart(3, '0')) || match;
+      });
+      inputResultado.value = mensaje;
+      calcularEntropia(mensaje);
+    }
+
+    function copiar() {
+      var mensajeEncriptado = inputResultado.value;
+      navigator.clipboard.writeText(mensajeEncriptado);
+    }
+    
+    function escuchar() {
+      var mensajeEncriptado = inputResultado.value;
+      let msg = new SpeechSynthesisUtterance();
+      msg.text = mensajeEncriptado;
+      msg.lang = "es-Es";
+      window.speechSynthesis.speak(msg);
+    }
+    
+    function calcularEntropia(mensaje) {
+      const frecuencia = {};
+      for (let i = 0; i < mensaje.length; i++) {
+        const char = mensaje[i];
+        if (/[A-Za-zÑñ]/.test(char)) {
+          frecuencia[char] = (frecuencia[char] || 0) + 1;
+        }
+      }
+
+      const longitud = mensaje.length;
+      let entropia = 0;
+      for (const char in frecuencia) {
+        const probabilidad = frecuencia[char] / longitud;
+        entropia -= probabilidad * Math.log2(probabilidad);
+      }
+
+      divEntropia.innerHTML = `Entropía del mensaje: ${entropia.toFixed(2)}`;
+    }
+
+    btnEncriptar.onclick = () => {
+      const modificador = inputModificador.value;
+      encriptar(modificador);
+    };
+    
+    btnDesencriptar.onclick = () => {
+      const modificador = inputModificador.value;
+      desencriptar(modificador);
+    };
+
+    btnCopiar.onclick = copiar;
+    btnEscuchar.onclick = escuchar;
   </script>
 </body>
 </html>
