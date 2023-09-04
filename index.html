@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="index.css"> <!-- IMPORTANDO EL CSS--> 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" >
 </head>
-
 <body>
   <table>
   <input type="text" id="mensaje" placeholder="Ingrese un mensaje" class="form-control">
@@ -15,9 +14,12 @@
   <input type="button" id="encriptar" value="Encriptar" class="btn btn-primary">
   <input type="button" id="desencriptar" value="Desencriptar" class="btn btn-primary">
   <input type="button" id="copiar" value="Copiar" class="btn btn-success">
-  <input type="button" id="escuchar" value="Escuchar" class="btn btn-danger">
+<input type="button" id="convertirNumerosColores" value="Números a Colores" class="btn btn-info">
+    <input type="button" id="convertirColoresNumeros" value="Colores a Números" class="btn btn-info">
+<input type="button" id="escuchar" value="Escuchar" class="btn btn-danger">
   <input type="text" id="resultado" readonly>
   <div id="entropia"></div>
+<div id="coloresResultado">  </div>
   </table>
   <script>
     const inputMensaje = document.querySelector("#mensaje");
@@ -28,6 +30,9 @@
     const btnDesencriptar = document.querySelector("#desencriptar");
     const btnCopiar = document.querySelector("#copiar");
     const btnEscuchar = document.querySelector("#escuchar");
+    const btnConvertirNumerosColores = document.querySelector("#convertirNumerosColores"); // Agregado
+    const btnConvertirColoresNumeros = document.querySelector("#convertirColoresNumeros"); // Agregado
+
     
     const equivalencias = {
       'A': '693', 'B': '396', 'C': '111', 'D': '714', 'E': '417',
@@ -43,7 +48,10 @@
       'u': '777', 'v': '471', 'w': '174', 'x': '888', 'y': '582',
       'z': '285', 'ñ': '999'
     };
-
+const colores = {
+      '1': 'amarillo', '2': 'azul', '3': 'rojo', '4': 'verde',
+      '5': 'naranja', '6': 'café', '7': 'negro', '8': 'blanco', '9': 'gris'
+    };
     function encriptar(modificador) {
       const mensaje = inputMensaje.value;
       const mensajeEncriptado = mensaje.replace(/[A-Za-zÑñ]/g, function (match) {
@@ -104,9 +112,40 @@
       const modificador = inputModificador.value;
       desencriptar(modificador);
     };
+function convertirNumerosColores() {
+  const mensaje = inputResultado.value;
+  const mensajeConvertido = mensaje.replace(/\d/g, function (match) {
+    return `<span class="color${match}">${colores[match]}</span> `;
+  });
+  // Mostrar los colores en el input
+  inputResultado.value = mensajeConvertido.trim(); // Eliminar espacios en blanco al principio y al final
+  // Mostrar los colores en el nuevo div
+  document.querySelector("#coloresResultado").innerHTML = mensajeConvertido;
+}
+
+function convertirColoresNumeros() {
+  const mensaje = inputResultado.value;
+  const mensajeConvertido = mensaje.replace(/<span class="color(\d+)">(.+?)<\/span>/g, function (match, numero, colorName) {
+    const colorNumero = Object.keys(colores).find(key => colores[key] === colorName);
+    return colorNumero !== undefined ? colorNumero : match;
+  });
+  // Mostrar el resultado en el input sin espacios entre números
+  inputResultado.value = mensajeConvertido.replace(/\s/g, '');
+  // Limpiar el contenido del div
+  document.querySelector("#coloresResultado").innerHTML = '';
+}
+
+
+
+
+    btnConvertirNumerosColores.onclick = convertirNumerosColores;
+    btnConvertirColoresNumeros.onclick = convertirColoresNumeros;
 
     btnCopiar.onclick = copiar;
     btnEscuchar.onclick = escuchar;
   </script>
 </body>
 </html>
+
+
+   
