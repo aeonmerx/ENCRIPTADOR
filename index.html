@@ -9,6 +9,7 @@
 </head>
 
 <body>
+  <table>
   <input type="text" id="mensaje" placeholder="Ingrese un mensaje" class="form-control">
   <input type="text" id="modificador" placeholder="Ingrese un modificador" class="form-control">
   <input type="button" id="encriptar" value="Encriptar" class="btn btn-primary">
@@ -17,7 +18,7 @@
   <input type="button" id="escuchar" value="Escuchar" class="btn btn-danger">
   <input type="text" id="resultado" readonly>
   <div id="entropia"></div>
-  
+  </table>
   <script>
     const inputMensaje = document.querySelector("#mensaje");
     const inputModificador = document.querySelector("#modificador");
