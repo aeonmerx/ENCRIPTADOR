@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Encriptador con Modificador</title>
-</head>
-<body>
-  <input type="text" id="mensaje" placeholder="Ingrese un mensaje">
-  <input type="text" id="modificador" placeholder="Ingrese un modificador">
-  <input type="button" id="encriptar" value="Encriptar">
-  <input type="button" id="desencriptar" value="Desencriptar">
-  <input type="button" id="copiar" value="Copiar">
-  <input type="button" id="escuchar" value="Escuchar">
-  <input type="text" id="resultado" readonly>
-  <div id="entropia"></div>
-  
-  <script>
     const inputMensaje = document.querySelector("#mensaje");
     const inputModificador = document.querySelector("#modificador");
     const inputResultado = document.querySelector("#resultado");
@@ -103,6 +85,3 @@
 
     btnCopiar.onclick = copiar;
     btnEscuchar.onclick = escuchar;
-  </script>
-</body>
-</html>
