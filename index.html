@@ -245,17 +245,19 @@ function convertirColoresPlanetas() {
   // Mostrar los planetas en el div
   divColoresResultado.innerHTML = mensajeConvertido;
 }
-
 function convertirPlanetasColores() {
   const mensaje = inputResultado.value;
   const divColoresResultado = document.querySelector("#coloresResultado");
   
   const mensajeConvertido = mensaje.replace(/\b\w+\b/g, function (match) {
-    const planeta = planetas[match.toLowerCase()];
-    if (planeta) {
-      const style = `background-color: ${colores[planeta]}; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px;`;
-      // Agregar un span con el estilo al div de resultados
-      return `<span class="planeta" style="${style}">${planeta}</span>`;
+    const planetaColor = planetas[match.toLowerCase()];
+    if (planetaColor) {
+      const color = colores[planetaColor];
+      if (color) {
+        const style = `background-color: ${colores[planetaColor]}; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px;`;
+        // Solo devuelve el nombre del color, sin un span anidado
+        return `<span style="${style}">${color}</span>`;
+      }
     }
     return match;
   });
@@ -263,9 +265,13 @@ function convertirPlanetasColores() {
   // Mostrar el resultado en el input
   inputResultado.value = mensajeConvertido;
   
+  // Limpiar el contenido del div antes de mostrar los resultados
+  divColoresResultado.innerHTML = '';
   // Mostrar los colores en el div
-  divColoresResultado.innerHTML = mensajeConvertido;
+  divColoresResultado.insertAdjacentHTML('beforeend', mensajeConvertido);
 }
+
+
 
     btnConvertirNumerosColores.onclick = convertirNumerosColores;
     btnConvertirColoresNumeros.onclick = convertirColoresNumeros;
