@@ -71,7 +71,15 @@ table {
     .color7 { color: black; }
     .color8 { color: purple; }
     .color9 { color: grey; }
-
+  span.planeta-amarillo { background-color: yellow; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px; }
+  span.planeta-azul { background-color: blue; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px; }
+  span.planeta-rojo { background-color: red; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px; }
+  span.planeta-verde { background-color: green; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px; }
+  span.planeta-naranja { background-color: orange; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px; }
+  span.planeta-café { background-color: brown; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px; }
+  span.planeta-negro { background-color: black; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px; }
+  span.planeta-violeta { background-color: violet; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px; }
+  span.planeta-gris { background-color: grey; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px; }
 </style>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" >
 </head>
@@ -212,49 +220,46 @@ function convertirColoresNumeros() {
   document.querySelector("#coloresResultado").innerHTML = '';
 }
 function convertirColoresPlanetas() {
-  const mensaje = inputResultado.value;
-  const divColoresResultado = document.querySelector("#coloresResultado");
-  
-  const mensajeConvertido = mensaje.replace(/\b\w+\b/g, function (match) {
-    const planeta = planetas[match.toLowerCase()];
-    if (planeta) {
-      const style = `background-color: ${colores[planeta]}; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px;`;
-      // Agregar un span con el estilo al div de resultados
-      return `<span style="${style}">${match}</span>`;
+      const mensaje = inputResultado.value;
+      const divColoresResultado = document.querySelector("#coloresResultado");
+      
+      const mensajeConvertido = mensaje.replace(/\b\w+\b/g, function (match) {
+        const planeta = planetas[match.toLowerCase()];
+        if (planeta) {
+          const style = `background-color: ${colores[planeta]}; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px;`;
+          // Agregar un span con el estilo al div de resultados
+          return `<span class="planeta-${planeta}">${match}</span>`;
+        }
+        return match;
+      });
+      
+      // Mostrar el resultado en el input
+      inputResultado.value = mensajeConvertido;
+      
+      // Mostrar los colores/planetas en el div
+      divColoresResultado.innerHTML = mensajeConvertido;
     }
-    return match;
-  });
-  
-  // Mostrar el resultado en el input
-  inputResultado.value = mensajeConvertido;
-  
-  // Mostrar los colores/planetas en el div
-  divColoresResultado.innerHTML = mensajeConvertido;
-}
-function convertirPlanetasColores() {
-  const mensaje = inputResultado.value;
-  const divColoresResultado = document.querySelector("#coloresResultado");
-  
-  const mensajeConvertido = mensaje.replace(/\b\w+\b/g, function (match) {
-    const color = colores[planetas[match.toLowerCase()]];
-    if (color) {
-      const style = `background-color: ${color}; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px;`;
-      // Agregar un span con el estilo al div de resultados
-      return `<span style="${style}">${color}</span>`;
+
+    function convertirPlanetasColores() {
+      const mensaje = inputResultado.value;
+      const divColoresResultado = document.querySelector("#coloresResultado");
+      
+      const mensajeConvertido = mensaje.replace(/\b\w+\b/g, function (match) {
+        const color = colores[planetas[match.toLowerCase()]];
+        if (color) {
+          const style = `background-color: ${color}; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px;`;
+          // Agregar un span con el estilo al div de resultados
+          return `<span class="color${Object.keys(colores).find(key => colores[key] === color)}">${color}</span>`;
+        }
+        return match;
+      });
+      
+      // Mostrar el resultado en el input
+      inputResultado.value = mensajeConvertido;
+      
+      // Mostrar los colores en el div
+      divColoresResultado.innerHTML = mensajeConvertido;
     }
-    return match;
-  });
-  
-  // Mostrar el resultado en el input
-  inputResultado.value = mensajeConvertido;
-  
-  // Mostrar los colores en el div
-  divColoresResultado.innerHTML = mensajeConvertido;
-}
-
-
-
-
     btnConvertirNumerosColores.onclick = convertirNumerosColores;
     btnConvertirColoresNumeros.onclick = convertirColoresNumeros;
     btnConvertirColoresPlanetas.onclick = convertirColoresPlanetas;
