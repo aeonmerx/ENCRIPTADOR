@@ -84,6 +84,8 @@ table {
   <input type="button" id="copiar" value="Copiar" class="btn btn-success w-50">
 <input type="button" id="convertirNumerosColores" value="Números a Colores" class="btn btn-secondary w-50">
     <input type="button" id="convertirColoresNumeros" value="Colores a Números" class="btn btn-info w-50">
+    <input type="button" id="convertirPlanetasColores" value="Planetas a Colores" class="btn btn-warning w-50"> <!-- Botón para convertir planetas a colores -->
+<input type="button" id="convertirColoresPlanetas" value="Colores a Planetas" class="btn btn-danger w-50"> <!-- Botón para convertir colores a planetas -->
 <input type="button" id="escuchar" value="Escuchar" class="btn btn-danger w-50">
   <input type="text" id="resultado" class="form-control" readonly>
   <div id="entropia"></div>
@@ -100,6 +102,8 @@ table {
     const btnEscuchar = document.querySelector("#escuchar");
     const btnConvertirNumerosColores = document.querySelector("#convertirNumerosColores"); // Agregado
     const btnConvertirColoresNumeros = document.querySelector("#convertirColoresNumeros"); // Agregado
+const btnConvertirPlanetasColores = document.querySelector("#convertirPlanetasColores"); // Nuevo botón
+const btnConvertirColoresPlanetas = document.querySelector("#convertirColoresPlanetas"); // Nuevo botón
 
     
     const equivalencias = {
@@ -120,6 +124,11 @@ const colores = {
       '1': 'amarillo', '2': 'azul', '3': 'rojo', '4': 'verde',
       '5': 'naranja', '6': 'café', '7': 'negro', '8': 'blanco', '9': 'gris'
     };
+    const planetas = {
+  'sol': 'amarillo', 'venus': 'azul', 'marte': 'rojo', 'la tierra': 'verde',
+  'mercurio': 'naranja', 'jupiter': 'café', 'saturno': 'negro', 'urano': 'blanco', 'la luna': 'gris'
+};
+
     function encriptar(modificador) {
       const mensaje = inputMensaje.value;
       const mensajeEncriptado = mensaje.replace(/[A-Za-zÑñ]/g, function (match) {
@@ -202,12 +211,54 @@ function convertirColoresNumeros() {
   // Limpiar el contenido del div
   document.querySelector("#coloresResultado").innerHTML = '';
 }
+function convertirColoresPlanetas() {
+  const mensaje = inputResultado.value;
+  const divColoresResultado = document.querySelector("#coloresResultado");
+  
+  const mensajeConvertido = mensaje.replace(/\b\w+\b/g, function (match) {
+    const planeta = planetas[match.toLowerCase()];
+    if (planeta) {
+      const style = `background-color: ${colores[planeta]}; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px;`;
+      // Agregar un span con el estilo al div de resultados
+      return `<span style="${style}">${match}</span>`;
+    }
+    return match;
+  });
+  
+  // Mostrar el resultado en el input
+  inputResultado.value = mensajeConvertido;
+  
+  // Mostrar los colores/planetas en el div
+  divColoresResultado.innerHTML = mensajeConvertido;
+}
+function convertirPlanetasColores() {
+  const mensaje = inputResultado.value;
+  const divColoresResultado = document.querySelector("#coloresResultado");
+  
+  const mensajeConvertido = mensaje.replace(/\b\w+\b/g, function (match) {
+    const color = colores[planetas[match.toLowerCase()]];
+    if (color) {
+      const style = `background-color: ${color}; color: white; padding: 2px 5px; border-radius: 3px; margin-right: 5px;`;
+      // Agregar un span con el estilo al div de resultados
+      return `<span style="${style}">${color}</span>`;
+    }
+    return match;
+  });
+  
+  // Mostrar el resultado en el input
+  inputResultado.value = mensajeConvertido;
+  
+  // Mostrar los colores en el div
+  divColoresResultado.innerHTML = mensajeConvertido;
+}
 
 
 
 
     btnConvertirNumerosColores.onclick = convertirNumerosColores;
     btnConvertirColoresNumeros.onclick = convertirColoresNumeros;
+    btnConvertirColoresPlanetas.onclick = convertirColoresPlanetas;
+btnConvertirPlanetasColores.onclick = convertirPlanetasColores;
 
     btnCopiar.onclick = copiar;
     btnEscuchar.onclick = escuchar;
