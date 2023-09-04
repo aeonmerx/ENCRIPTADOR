@@ -245,15 +245,31 @@ function convertirColoresPlanetas() {
   // Mostrar los planetas en el div
   divColoresResultado.innerHTML = mensajeConvertido;
 }
-function convertirPlanetasColores() {
+
+    function convertirPlanetasColores() {
   const mensaje = inputResultado.value;
   const divColoresResultado = document.querySelector("#coloresResultado");
 
-  const mensajeConvertido = mensaje.replace(/<span class="planeta">(.+?)<\/span>/g, function (match, planeta) {
-    const color = colores[planeta.toLowerCase()];
+  // Definir un objeto de mapeo de planetas a colores
+  const planetasAColores = {
+    'sol': 'amarillo',
+    'venus': 'azul',
+    'marte': 'rojo',
+    'la tierra': 'verde',
+    'mercurio': 'naranja',
+    'jupiter': 'café',
+    'saturno': 'negro',
+    'urano': 'violeta',
+    'la luna': 'gris'
+  };
+
+  // Reemplazar los planetas por colores en el mensaje
+  const mensajeConvertido = mensaje.replace(/\b\w+\b/g, function (match) {
+    const color = planetasAColores[match.toLowerCase()];
     if (color) {
-      // Reemplaza el planeta por el color correspondiente y mantiene la clase del span
-      return `<span class="color${Object.keys(colores).find(key => colores[key] === color)}">${color}</span>`;
+      // Reemplaza el planeta por el color y agrega la clase "color" seguida del número
+      const colorNumero = Object.keys(colores).find(key => colores[key] === color);
+      return `<span class="color${colorNumero}">${color}</span>`;
     }
     return match;
   });
@@ -266,6 +282,9 @@ function convertirPlanetasColores() {
   // Mostrar los colores en el div
   divColoresResultado.insertAdjacentHTML('beforeend', mensajeConvertido);
 }
+
+
+
 
     btnConvertirNumerosColores.onclick = convertirNumerosColores;
     btnConvertirColoresNumeros.onclick = convertirColoresNumeros;
