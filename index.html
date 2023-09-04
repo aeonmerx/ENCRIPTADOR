@@ -4,76 +4,72 @@
   <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Encriptador con Modificador</title>
-  <link rel="stylesheet" href="index.css"> <!-- IMPORTANDO EL CSS--> 
+<link rel="stylesheet" href="index.css"> <!-- IMPORTANDO EL CSS--> 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" >
 </head>
 
 <body>
   <table>
-    <input type="text" id="mensaje" placeholder="Ingrese un mensaje" class="form-control">
-    <input type="text" id="modificador" placeholder="Ingrese un modificador" class="form-control">
-    <input type="button" id="encriptar" value="Encriptar" class="btn btn-primary">
-    <input type="button" id="desencriptar" value="Desencriptar" class="btn btn-primary">
-    <input type="button" id="copiar" value="Copiar" class="btn btn-success">
-    <input type="button" id="escuchar" value="Escuchar" class="btn btn-danger">
-    <div id="resultado" style="font-size: 24px;"></div>
-    <div id="entropia"></div>
-    <div id="mensaje-error" class="text-danger"></div>
+  <input type="text" id="mensaje" placeholder="Ingrese un mensaje" class="form-control">
+  <input type="text" id="modificador" placeholder="Ingrese un modificador" class="form-control">
+  <input type="button" id="encriptar" value="Encriptar" class="btn btn-primary">
+  <input type="button" id="desencriptar" value="Desencriptar" class="btn btn-primary">
+  <input type="button" id="copiar" value="Copiar" class="btn btn-success">
+  <input type="button" id="escuchar" value="Escuchar" class="btn btn-danger">
+  <input type="text" id="resultado" readonly>
+  <div id="entropia"></div>
   </table>
   <script>
     const inputMensaje = document.querySelector("#mensaje");
     const inputModificador = document.querySelector("#modificador");
-    const divResultado = document.querySelector("#resultado");
+    const inputResultado = document.querySelector("#resultado");
     const divEntropia = document.querySelector("#entropia");
-    const divMensajeError = document.querySelector("#mensaje-error");
     const btnEncriptar = document.querySelector("#encriptar");
     const btnDesencriptar = document.querySelector("#desencriptar");
     const btnCopiar = document.querySelector("#copiar");
     const btnEscuchar = document.querySelector("#escuchar");
     
     const equivalencias = {
-      'A': 'red', 'B': 'green', 'C': 'blue', 'D': 'yellow', 'E': 'orange',
-      'F': 'purple', 'G': 'pink', 'H': 'brown', 'I': 'cyan', 'J': 'magenta',
-      'K': 'red', 'L': 'green', 'M': 'blue', 'N': 'yellow', 'O': 'orange',
-      'P': 'purple', 'Q': 'pink', 'R': 'brown', 'S': 'cyan', 'T': 'magenta',
-      'U': 'red', 'V': 'green', 'W': 'blue', 'X': 'yellow', 'Y': 'orange',
-      'Z': 'purple', 'Ñ': 'pink',
-      'a': 'brown', 'b': 'cyan', 'c': 'magenta', 'd': 'red', 'e': 'green',
-      'f': 'blue', 'g': 'yellow', 'h': 'orange', 'i': 'purple', 'j': 'pink',
-      'k': 'brown', 'l': 'cyan', 'm': 'magenta', 'n': 'red', 'o': 'green',
-      'p': 'blue', 'q': 'yellow', 'r': 'orange', 's': 'purple', 't': 'pink',
-      'u': 'brown', 'v': 'cyan', 'w': 'magenta', 'x': 'red', 'y': 'green',
-      'z': 'blue', 'ñ': 'yellow'
+      'A': '693', 'B': '396', 'C': '111', 'D': '714', 'E': '417',
+      'F': '222', 'G': '825', 'H': '528', 'I': '333', 'J': '936',
+      'K': '639', 'L': '444', 'M': '147', 'N': '741', 'O': '555',
+      'P': '258', 'Q': '852', 'R': '666', 'S': '369', 'T': '963',
+      'U': '777', 'V': '471', 'W': '174', 'X': '888', 'Y': '582',
+      'Z': '285', 'Ñ': '999',
+      'a': '693', 'b': '396', 'c': '111', 'd': '714', 'e': '417',
+      'f': '222', 'g': '825', 'h': '528', 'i': '333', 'j': '936',
+      'k': '639', 'l': '444', 'm': '147', 'n': '741', 'o': '555',
+      'p': '258', 'q': '852', 'r': '666', 's': '369', 't': '963',
+      'u': '777', 'v': '471', 'w': '174', 'x': '888', 'y': '582',
+      'z': '285', 'ñ': '999'
     };
 
     function encriptar(modificador) {
       const mensaje = inputMensaje.value;
       const mensajeEncriptado = mensaje.replace(/[A-Za-zÑñ]/g, function (match) {
         const equivalencia = equivalencias[match.toUpperCase()] || match;
-        return equivalencia;
+        return (parseInt(equivalencia) + parseInt(modificador || 0)).toString().padStart(3, '0');
       });
-
-      divResultado.innerHTML = mensajeEncriptado;
+      inputResultado.value = mensajeEncriptado;
       calcularEntropia(mensajeEncriptado);
     }
     
     function desencriptar(modificador) {
-      const mensajeEncriptado = divResultado.innerHTML;
-      const mensaje = mensajeEncriptado.replace(/<span style="color: (\w+);">(\w)<\/span>/g, function (match, color, letra) {
-        return Object.keys(equivalencias).find(key => equivalencias[key] === color) || letra;
+      const mensajeEncriptado = inputMensaje.value;
+      const mensaje = mensajeEncriptado.replace(/\d{3}/g, function (match) {
+        return Object.keys(equivalencias).find(key => equivalencias[key.toUpperCase()] === (parseInt(match) - parseInt(modificador || 0)).toString().padStart(3, '0')) || match;
       });
-
-      inputMensaje.value = mensaje;
+      inputResultado.value = mensaje;
       calcularEntropia(mensaje);
     }
 
     function copiar() {
-      var mensajeEncriptado = divResultado.innerHTML;
+      var mensajeEncriptado = inputResultado.value;
       navigator.clipboard.writeText(mensajeEncriptado);
     }
     
     function escuchar() {
-      var mensajeEncriptado = divResultado.innerHTML;
+      var mensajeEncriptado = inputResultado.value;
       let msg = new SpeechSynthesisUtterance();
       msg.text = mensajeEncriptado;
       msg.lang = "es-Es";
@@ -111,25 +107,6 @@
 
     btnCopiar.onclick = copiar;
     btnEscuchar.onclick = escuchar;
-
-    //
-    //
-    /*  const equivalencias = {
-      'A': '693', 'B': '396', 'C': '111', 'D': '714', 'E': '417',
-      'F': '222', 'G': '825', 'H': '528', 'I': '333', 'J': '936',
-      'K': '639', 'L': '444', 'M': '147', 'N': '741', 'O': '555',
-      'P': '258', 'Q': '852', 'R': '666', 'S': '369', 'T': '963',
-      'U': '777', 'V': '471', 'W': '174', 'X': '888', 'Y': '582',
-      'Z': '285', 'Ñ': '999',
-      'a': '693', 'b': '396', 'c': '111', 'd': '714', 'e': '417',
-      'f': '222', 'g': '825', 'h': '528', 'i': '333', 'j': '936',
-      'k': '639', 'l': '444', 'm': '147', 'n': '741', 'o': '555',
-      'p': '258', 'q': '852', 'r': '666', 's': '369', 't': '963',
-      'u': '777', 'v': '471', 'w': '174', 'x': '888', 'y': '582',
-      'z': '285', 'ñ': '999'
-    };
-*/
   </script>
 </body>
 </html>
-
