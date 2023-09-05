@@ -4,29 +4,11 @@
   <title> USE</title>
   <meta charset="UTF-8">
 </head>
-  <body>
+<body>
   <h1> USE TESTING WEB: <br> ABRE LA CONSOLA DEL NAVEGADOR CON F12 PARA VER RESULTADOS</h1>
-  <script>
-//  use.js
 
-// Importar el módulo encriptador
-const encriptador = require('./encriptador');
-
-// Usar las funciones y datos del encriptador
-const modificador = 24;
-const mensaje = 'AEON MERX';
-
-const mensajeEncriptado = encriptador.encriptar(modificador, mensaje);
-console.log('Mensaje encriptado:', mensajeEncriptado);
-
-const mensajeDesencriptado = encriptador.desencriptar(modificador, mensajeEncriptado);
-console.log('Mensaje desencriptado:', mensajeDesencriptado);
-
-const entropia = encriptador.calcularEntropia(mensajeEncriptado);
-console.log('Entropía del mensaje:', entropia);
-
-console.log('Colores:', encriptador.colores);
-console.log('Planetas:', encriptador.planetas);
-</script>
-  </body>
+  <!-- Incluye tus scripts directamente en la página HTML -->
+  <script src="encriptador.js"></script>
+  <script src="use.js"></script>
+</body>
 </html>
