@@ -34,4 +34,4 @@ const mensaje = 'AEON MERX';
   } else {
     console.log('El modificador ingresado no es un número entero válido.');
   }
-});
+
