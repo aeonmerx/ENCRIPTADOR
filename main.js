@@ -6,6 +6,11 @@
     const btnDesencriptar = document.querySelector("#desencriptar");
     const btnCopiar = document.querySelector("#copiar");
     const btnEscuchar = document.querySelector("#escuchar");
+    const btnConvertirNumerosColores = document.querySelector("#convertirNumerosColores"); // Agregado
+    const btnConvertirColoresNumeros = document.querySelector("#convertirColoresNumeros"); // Agregado
+const btnConvertirPlanetasColores = document.querySelector("#convertirPlanetasColores"); // Nuevo botón
+const btnConvertirColoresPlanetas = document.querySelector("#convertirColoresPlanetas"); // Nuevo botón
+
     
     const equivalencias = {
       'A': '693', 'B': '396', 'C': '111', 'D': '714', 'E': '417',
@@ -21,6 +26,14 @@
       'u': '777', 'v': '471', 'w': '174', 'x': '888', 'y': '582',
       'z': '285', 'ñ': '999'
     };
+const colores = {
+      '1': 'amarillo', '2': 'azul', '3': 'rojo', '4': 'verde',
+      '5': 'naranja', '6': 'café', '7': 'negro', '8': 'violeta', '9': 'gris'
+    };
+    const planetas = {
+  'sol': 'amarillo', 'venus': 'azul', 'marte': 'rojo', 'tierra': 'verde',
+  'mercurio': 'naranja', 'jupiter': 'café', 'saturno': 'negro', 'urano': 'violeta', 'luna': 'gris'
+};
 
     function encriptar(modificador) {
       const mensaje = inputMensaje.value;
@@ -82,6 +95,101 @@
       const modificador = inputModificador.value;
       desencriptar(modificador);
     };
+function convertirNumerosColores() {
+  const mensaje = inputResultado.value;
+  const mensajeConvertido = mensaje.replace(/\d/g, function (match) {
+    return `<span class="color${match}">${colores[match]}</span> `;
+  });
+  // Mostrar los colores en el input
+  inputResultado.value = mensajeConvertido.trim(); // Eliminar espacios en blanco al principio y al final
+  // Mostrar los colores en el nuevo div
+  document.querySelector("#coloresResultado").innerHTML = mensajeConvertido;
+}
 
+function convertirColoresNumeros() {
+  const mensaje = inputResultado.value;
+  const mensajeConvertido = mensaje.replace(/<span class="color(\d+)">(.+?)<\/span>/g, function (match, numero, colorName) {
+    const colorNumero = Object.keys(colores).find(key => colores[key] === colorName);
+    return colorNumero !== undefined ? colorNumero : match;
+  });
+  // Mostrar el resultado en el input sin espacios entre números
+  inputResultado.value = mensajeConvertido.replace(/\s/g, '');
+  // Limpiar el contenido del div
+  document.querySelector("#coloresResultado").innerHTML = '';
+}
+function convertirColoresPlanetas() {
+  const mensaje = inputResultado.value;
+  const divColoresResultado = document.querySelector("#coloresResultado");
+
+  // Definir un objeto de mapeo de colores a planetas
+  const coloresAPlanetas = {
+    'amarillo': 'sol',
+    'azul': 'venus',
+    'rojo': 'marte',
+    'verde': 'tierra',
+    'naranja': 'mercurio',
+    'café': 'jupiter',
+    'negro': 'saturno',
+    'violeta': 'urano',
+    'gris': 'luna'
+  };
+
+  // Reemplazar los colores por planetas en el mensaje
+  const mensajeConvertido = mensaje.replace(/<span class="color(\d+)">(.+?)<\/span>/g, function (match, numero, colorName) {
+    const planeta = coloresAPlanetas[colorName];
+    if (planeta) {
+      return `<span class="planeta">${planeta}</span>`;
+    }
+    return match;
+  });
+
+  // Mostrar el resultado en el input
+  inputResultado.value = mensajeConvertido;
+
+  // Mostrar los planetas en el div
+  divColoresResultado.innerHTML = mensajeConvertido;
+}
+function convertirPlanetasColores() {
+      const mensaje = inputResultado.value;
+      const divColoresResultado = document.querySelector("#coloresResultado");
+
+      // Definir un objeto de mapeo de planetas a colores
+      const planetasAColores = {
+        'sol': 'amarillo',
+        'venus': 'azul',
+        'marte': 'rojo',
+        'tierra': 'verde',
+        'mercurio': 'naranja',
+        'jupiter': 'café',
+        'saturno': 'negro',
+        'urano': 'violeta',
+        'luna': 'gris'
+      };
+
+      // Reemplazar los planetas por colores en el mensaje
+      const mensajeConvertido = mensaje.replace(/\b\w+\b/g, function (match) {
+        const color = planetasAColores[match.toLowerCase()];
+        if (color) {
+          // Reemplaza el planeta por el color y agrega la clase "color" seguida del número
+          const colorNumero = Object.keys(colores).find(key => colores[key] === color);
+          return `<span class="color${colorNumero}">${color}</span> `;
+        }
+        return match;
+      });
+
+      // Mostrar el resultado en el input
+      inputResultado.value = mensajeConvertido;
+
+      // Mostrar los colores en el nuevo div
+      divColoresResultado.innerHTML = mensajeConvertido;
+    }
+
+    
+
+
+    btnConvertirNumerosColores.onclick = convertirNumerosColores;
+    btnConvertirColoresNumeros.onclick = convertirColoresNumeros;
+    btnConvertirColoresPlanetas.onclick = convertirColoresPlanetas;
+    btnConvertirPlanetasColores.onclick = convertirPlanetasColores;
     btnCopiar.onclick = copiar;
     btnEscuchar.onclick = escuchar;
