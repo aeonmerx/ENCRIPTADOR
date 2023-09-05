@@ -62,5 +62,20 @@ function calcularEntropia(mensaje) {
 
   return entropia.toFixed(2);
 }
+function convertirNumerosAColores(mensaje) {
+  const mensajeConvertido = mensaje.replace(/\d/g, function (match) {
+    return colores[match] || match;
+  });
+  return mensajeConvertido;
+}
+
+// Función para convertir colores en el mensaje a planetas
+function convertirColoresAPlanetas(mensaje) {
+  const mensajeConvertido = mensaje.replace(/\b\w+\b/g, function (match) {
+    return planetas[match.toLowerCase()] || match;
+  });
+  return mensajeConvertido;
+}
+
 
 
