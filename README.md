@@ -24,6 +24,7 @@ Uso de las Funciones
 Una vez que hayas incluido el script en tu página web, puedes utilizar las siguientes funciones:
 
 Encriptar un Mensaje
+<script>
 const modificador = 24;
 const mensaje = 'AEON MERX';
 
@@ -66,7 +67,7 @@ const mensajeEncriptado = '717441579765 171441690912';
 
 // Convertir números en el mensaje a colores
 const mensajeConColores = convertirNumerosAColores(mensajeEncriptado);
-
+</script>
 Autor
 William Andres Rativa
 Programador Lìder de Aeon Merx
