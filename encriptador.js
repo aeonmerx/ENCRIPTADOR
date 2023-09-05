@@ -63,11 +63,4 @@ function calcularEntropia(mensaje) {
   return entropia.toFixed(2);
 }
 
-// Exportar las funciones y datos necesarios
-module.exports = {
-  encriptar,
-  desencriptar,
-  colores,
-  planetas,
-  calcularEntropia,
-};
+
