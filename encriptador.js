@@ -79,13 +79,4 @@ function convertirColoresAPlanetas(mensaje) {
   return mensajeConvertido;
 }
 
-// Exportar las funciones y datos necesarios
-module.exports = {
-  encriptar,
-  desencriptar,
-  colores,
-  planetas,
-  calcularEntropia,
-  convertirNumerosAColores,
-  convertirColoresAPlanetas
-};
+
