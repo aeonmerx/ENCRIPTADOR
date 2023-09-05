@@ -73,21 +73,9 @@ function convertirNumerosAColores(mensaje) {
 }
 // Función para convertir colores en el mensaje a planetas
 function convertirColoresAPlanetas(mensaje) {
-  // Separa el mensaje en palabras
-  const palabras = mensaje.split(' ');
-  // Mapea cada palabra y verifica si es un color, si lo es, lo reemplaza por el planeta correspondiente
-  const mensajeConvertido = palabras.map(palabra => {
-    // Verifica si la palabra es un color
-    const planeta = planetas[palabra];
-    if (planeta) {
-      // Si es un color, devuelve el nombre del planeta correspondiente
-      return planeta;
-    } else {
-      // Si la palabra no es un color, déjala sin cambios
-      return palabra;
-    }
-  }).join(' ');
-
+ const mensajeConvertido = mensaje.replace(/\d/g, function (match){
+   return planetas[match]|| match ;
+ });
   return mensajeConvertido;
 }
 
