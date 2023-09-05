@@ -27,9 +27,4 @@ if (!isNaN(modificador) && Number.isInteger(modificador)) {
   const mensajeConColores = convertirNumerosAColores(mensajeEncriptado);
   console.log('Mensaje con colores:', mensajeConColores);
 
-  // Convertir colores en el mensaje a planetas
-  const mensajeConPlanetas = convertirColoresAPlanetas(mensajeConColores);
-  console.log('Mensaje con planetas:', mensajeConPlanetas);
-} else {
-  console.log('El modificador ingresado no es un número entero válido.');
-}
+  
