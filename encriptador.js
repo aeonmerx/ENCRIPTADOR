@@ -73,9 +73,12 @@ function convertirNumerosAColores(mensaje) {
 
 // Función para convertir colores en el mensaje a planetas
 function convertirColoresAPlanetas(mensaje) {
-  // Separa el mensaje en palabras
-  const palabras = mensaje.split(' ');
-  
+  // Convierte el mensaje a minúsculas y elimina espacios
+  const mensajeNormalizado = mensaje.toLowerCase().replace(/\s/g, '');
+
+  // Separa el mensaje normalizado en palabras
+  const palabras = mensajeNormalizado.split('');
+
   // Mapea cada palabra y verifica si es un color, si lo es, lo reemplaza por el planeta correspondiente
   const mensajeConvertido = palabras.map(palabra => {
     // Verifica si la palabra es un color
@@ -92,6 +95,7 @@ function convertirColoresAPlanetas(mensaje) {
 
   return mensajeConvertido;
 }
+
 
 
 
