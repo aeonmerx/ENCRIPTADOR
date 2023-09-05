@@ -84,11 +84,13 @@ function convertirColoresAPlanetas(mensaje) {
 
   // Compara el mensaje convertido con el mensaje original
   if (mensaje === mensajeOriginal) {
-    return 0 ;
+    return 0;
   }
 
   return mensaje;
 }
+
+
 
 
 
