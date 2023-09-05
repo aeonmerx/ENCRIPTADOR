@@ -6,7 +6,7 @@
 const modificador = 24;
 const mensaje = 'AEON MERX';
 
-/ Verificar si el modificador es un número entero válido
+// Verificar si el modificador es un número entero válido
   if (!isNaN(modificador) && Number.isInteger(modificador)) {
     // Encriptar el mensaje
     const mensajeEncriptado = encriptar(modificador, mensaje);
