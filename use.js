@@ -7,31 +7,29 @@ const modificador = 24;
 const mensaje = 'AEON MERX';
 
 // Verificar si el modificador es un número entero válido
-  if (!isNaN(modificador) && Number.isInteger(modificador)) {
-    // Encriptar el mensaje
-    const mensajeEncriptado = encriptar(modificador, mensaje);
-    console.log('Mensaje encriptado:', mensajeEncriptado);
+if (!isNaN(modificador) && Number.isInteger(modificador)) {
+  // Encriptar el mensaje
+  const mensajeEncriptado = encriptar(modificador, mensaje);
+  console.log('Mensaje encriptado:', mensajeEncriptado);
 
-    // Desencriptar el mensaje
-    const mensajeDesencriptado = desencriptar(modificador, mensajeEncriptado);
-    console.log('Mensaje desencriptado:', mensajeDesencriptado);
+  // Desencriptar el mensaje
+  const mensajeDesencriptado = desencriptar(modificador, mensajeEncriptado);
+  console.log('Mensaje desencriptado:', mensajeDesencriptado);
 
-    // Calcular la entropía del mensaje encriptado
-    const entropia = calcularEntropia(mensajeEncriptado);
-    console.log('Entropía del mensaje:', entropia);
+  // Calcular la entropía del mensaje encriptado
+  const entropia = calcularEntropia(mensajeEncriptado);
+  console.log('Entropía del mensaje:', entropia);
 
-    // Acceder a los datos de colores y planetas directamente desde el módulo encriptador.js
-    console.log('Colores:', colores);
-    console.log('Planetas:', planetas);
+  // Acceder a los datos de colores y planetas directamente desde el módulo encriptador.js
+  console.log('Colores:', colores);
 
-    // Convertir números en el mensaje a colores
-    const mensajeConColores = convertirNumerosAColores(mensajeEncriptado);
-    console.log('Mensaje con colores:', mensajeConColores);
+  // Convertir números en el mensaje a colores
+  const mensajeConColores = convertirNumerosAColores(mensajeEncriptado);
+  console.log('Mensaje con colores:', mensajeConColores);
 
-    // Convertir colores en el mensaje a planetas
-    const mensajeConPlanetas = convertirColoresAPlanetas(mensajeConColores);
-    console.log('Mensaje con planetas:', mensajeConPlanetas);
-  } else {
-    console.log('El modificador ingresado no es un número entero válido.');
-  }
-
+  // Convertir colores en el mensaje a planetas
+  const mensajeConPlanetas = convertirColoresAPlanetas(mensajeConColores);
+  console.log('Mensaje con planetas:', mensajeConPlanetas);
+} else {
+  console.log('El modificador ingresado no es un número entero válido.');
+}
