@@ -75,12 +75,24 @@ function convertirNumerosAColores(mensaje) {
 function convertirColoresAPlanetas(mensaje) {
   // Separa el mensaje en palabras
   const palabras = mensaje.split(' ');
+  
   // Mapea cada palabra y verifica si es un color, si lo es, lo reemplaza por el planeta correspondiente
-  const mensajeConvertido = palabras
-    .map(palabra => colores[palabra] ? planetas[colores[palabra]] : palabra)
-    .join(' ');
+  const mensajeConvertido = palabras.map(palabra => {
+    // Verifica si la palabra es un color
+    if (colores[palabra]) {
+      // Si es un color, obtén el nombre del planeta correspondiente desde el objeto planetas
+      const planeta = Object.keys(planetas).find(key => planetas[key] === colores[palabra]);
+      // Si se encuentra un planeta correspondiente, devuelve el nombre del planeta, de lo contrario, deja la palabra sin cambios
+      return planeta ? planeta : palabra;
+    } else {
+      // Si la palabra no es un color, déjala sin cambios
+      return palabra;
+    }
+  }).join(' ');
+
   return mensajeConvertido;
 }
+
 
 
 
