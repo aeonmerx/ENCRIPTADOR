@@ -84,7 +84,7 @@ function convertirColoresAPlanetas(mensaje) {
 
   // Compara el mensaje convertido con el mensaje original
   if (mensaje === mensajeOriginal) {
-    return "Error: No se encontraron colores en el mensaje.";
+    return 0 ;
   }
 
   return mensaje;
