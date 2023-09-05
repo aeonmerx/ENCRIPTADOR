@@ -70,21 +70,17 @@ function convertirNumerosAColores(mensaje) {
   });
   return mensajeConvertido;
 }
-
 // Función para convertir colores en el mensaje a planetas
 function convertirColoresAPlanetas(mensaje) {
-  // Convierte el mensaje a minúsculas y elimina espacios
-  const mensajeNormalizado = mensaje.toLowerCase().replace(/\s/g, '');
-
-  // Separa el mensaje normalizado en palabras
-  const palabras = mensajeNormalizado.split('');
-
+  // Separa el mensaje en palabras
+  const palabras = mensaje.split(' ');
   // Mapea cada palabra y verifica si es un color, si lo es, lo reemplaza por el planeta correspondiente
   const mensajeConvertido = palabras.map(palabra => {
     // Verifica si la palabra es un color
-    if (colores[palabra]) {
+    const color = Object.keys(colores).find(key => colores[key] === palabra);
+    if (color) {
       // Si es un color, obtén el nombre del planeta correspondiente desde el objeto planetas
-      const planeta = Object.keys(planetas).find(key => planetas[key] === colores[palabra]);
+      const planeta = Object.keys(planetas).find(key => planetas[key] === color);
       // Si se encuentra un planeta correspondiente, devuelve el nombre del planeta, de lo contrario, deja la palabra sin cambios
       return planeta ? planeta : palabra;
     } else {
