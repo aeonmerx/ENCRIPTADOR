@@ -1,4 +1,4 @@
-// encriptador.js
+
 
 // Objeto que contiene las equivalencias de caracteres
 const equivalencias = {
