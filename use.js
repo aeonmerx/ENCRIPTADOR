@@ -27,6 +27,8 @@ if (!isNaN(modificador) && Number.isInteger(modificador)) {
   const mensajeConColores = convertirNumerosAColores(mensajeEncriptado);
   console.log('Mensaje con colores:', mensajeConColores);
   // Convertir colores en el mensaje a planetas
+  console.log('Planetas:', planetas);
+  
   const mensajeConPlanetas = convertirColoresAPlanetas(mensajeConColores);
   console.log('Mensaje con planetas:', mensajeConPlanetas);
 } else {
