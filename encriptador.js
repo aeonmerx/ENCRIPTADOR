@@ -22,8 +22,8 @@ const colores = {
 };
 
 const planetas = {
-  'amarillo': 'sol', 'azul': 'venus', 'rojo': 'marte', 'verde': 'tierra',
-  'naranja': 'mercurio', 'café': 'jupiter', 'negro': 'saturno', 'violeta': 'urano', 'gris': 'luna'
+  '1': 'sol', '2': 'venus', '3': 'marte', '4': 'tierra',
+  '5': 'mercurio', '6': 'jupiter', '7': 'saturno', '8': 'urano', '9': 'luna'
 };
 
 
@@ -73,21 +73,10 @@ function convertirNumerosAColores(mensaje) {
 }
 // Función para convertir colores en el mensaje a planetas
 function convertirColoresAPlanetas(mensaje) {
-  // Copia el mensaje original para compararlo más tarde
-  const mensajeOriginal = mensaje;
-
-  // Itera sobre el objeto de colores y reemplaza cada color por su planeta correspondiente
-  for (const color in colores) {
-    const regex = new RegExp(color, 'g');
-    mensaje = mensaje.replace(regex, planetas[colores[color]]);
-  }
-
-  // Compara el mensaje convertido con el mensaje original
-  if (mensaje === mensajeOriginal) {
-    return 0;
-  }
-
-  return mensaje;
+  const mensajeConvertido = mensaje.replace(/\d/g, function (match) {
+    return planetas[match] || match;
+  });
+  return mensajeConvertido;
 }
 
 
