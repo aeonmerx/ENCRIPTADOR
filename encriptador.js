@@ -22,9 +22,10 @@ const colores = {
 };
 
 const planetas = {
-  'sol': 'amarillo', 'venus': 'azul', 'marte': 'rojo', 'tierra': 'verde',
-  'mercurio': 'naranja', 'jupiter': 'café', 'saturno': 'negro', 'urano': 'violeta', 'luna': 'gris'
+  'amarillo': 'sol', 'azul': 'venus', 'rojo': 'marte', 'verde': 'tierra',
+  'naranja': 'mercurio', 'café': 'jupiter', 'negro': 'saturno', 'violeta': 'urano', 'gris': 'luna'
 };
+
 
 // Función para encriptar un mensaje
 function encriptar(modificador, mensaje) {
@@ -77,12 +78,10 @@ function convertirColoresAPlanetas(mensaje) {
   // Mapea cada palabra y verifica si es un color, si lo es, lo reemplaza por el planeta correspondiente
   const mensajeConvertido = palabras.map(palabra => {
     // Verifica si la palabra es un color
-    const color = Object.keys(colores).find(key => colores[key] === palabra);
-    if (color) {
-      // Si es un color, obtén el nombre del planeta correspondiente desde el objeto planetas
-      const planeta = Object.keys(planetas).find(key => planetas[key] === color);
-      // Si se encuentra un planeta correspondiente, devuelve el nombre del planeta, de lo contrario, deja la palabra sin cambios
-      return planeta ? planeta : palabra;
+    const planeta = planetas[palabra];
+    if (planeta) {
+      // Si es un color, devuelve el nombre del planeta correspondiente
+      return planeta;
     } else {
       // Si la palabra no es un color, déjala sin cambios
       return palabra;
@@ -91,6 +90,7 @@ function convertirColoresAPlanetas(mensaje) {
 
   return mensajeConvertido;
 }
+
 
 
 
