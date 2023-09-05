@@ -1,4 +1,4 @@
-
+// encriptador.js
 
 // Objeto que contiene las equivalencias de caracteres
 const equivalencias = {
@@ -62,6 +62,8 @@ function calcularEntropia(mensaje) {
 
   return entropia.toFixed(2);
 }
+
+// Función para convertir números en el mensaje a colores
 function convertirNumerosAColores(mensaje) {
   const mensajeConvertido = mensaje.replace(/\d/g, function (match) {
     return colores[match] || match;
@@ -77,5 +79,13 @@ function convertirColoresAPlanetas(mensaje) {
   return mensajeConvertido;
 }
 
-
-
+// Exportar las funciones y datos necesarios
+module.exports = {
+  encriptar,
+  desencriptar,
+  colores,
+  planetas,
+  calcularEntropia,
+  convertirNumerosAColores,
+  convertirColoresAPlanetas
+};
