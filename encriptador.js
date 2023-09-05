@@ -73,10 +73,14 @@ function convertirNumerosAColores(mensaje) {
 
 // Función para convertir colores en el mensaje a planetas
 function convertirColoresAPlanetas(mensaje) {
-  const mensajeConvertido = mensaje.replace(/\b\w+\b/g, function (match) {
-    return planetas[match.toLowerCase()] || match;
-  });
+  // Separa el mensaje en palabras
+  const palabras = mensaje.split(' ');
+  // Mapea cada palabra y verifica si es un color, si lo es, lo reemplaza por el planeta correspondiente
+  const mensajeConvertido = palabras
+    .map(palabra => colores[palabra] ? planetas[colores[palabra]] : palabra)
+    .join(' ');
   return mensajeConvertido;
 }
+
 
 
