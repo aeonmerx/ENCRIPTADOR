@@ -32,7 +32,7 @@ const mensaje = 'AEON MERX';
 const mensajeEncriptado = encriptar(modificador, mensaje);
 Desencriptar un Mensaje
 javascript
-Copy code
+
 const modificador = 24;
 const mensajeEncriptado = '717441579765 171441690912';
 
@@ -40,14 +40,14 @@ const mensajeEncriptado = '717441579765 171441690912';
 const mensajeDesencriptado = desencriptar(modificador, mensajeEncriptado);
 Calcular la Entropía de un Mensaje Encriptado
 javascript
-Copy code
+
 const mensajeEncriptado = '717441579765 171441690912';
 
 // Calcular la entropía del mensaje encriptado
 const entropia = calcularEntropia(mensajeEncriptado);
 Convertir Números en el Mensaje a Colores
 javascript
-Copy code
+
 const mensajeEncriptado = '717441579765 171441690912';
 
 // Convertir números en el mensaje a colores
@@ -55,7 +55,7 @@ const mensajeConColores = convertirNumerosAColores(mensajeEncriptado);
 
 Calcular la Entropía de un Mensaje Encriptado
 javascript
-Copy code
+
 const mensajeEncriptado = '717441579765 171441690912';
 
 // Calcular la entropía del mensaje encriptado
